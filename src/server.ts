@@ -1,26 +1,11 @@
-import 'dotenv/config'
-import ApiLastFM from './service'
+import express from 'express'
 
-import { Mocktoptracks } from './mocks'
+const app = express()
 
-const api = new ApiLastFM()
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-async function main (userId) {
-  if (process.env.NODE_ENV === 'mock') {
-    return Mocktoptracks.forEach(track => {
-      console.log(track.name, '\n')
-    })
-  } else {
-    const response = await api.getTopTracks(userId)
-    console.log(response.data.toptracks)
-
-    const toptracks = response.data.toptracks.track
-
-    toptracks.forEach(track => {
-      console.log(track.artist.name)
-      console.log(track.name, '\n')
-    })
-  }
+app.get('/', (req, res) => {
+  res.send('Hello World!')
 }
-
-main('pedroperegrinaa')
+)
