@@ -1,4 +1,5 @@
 import axios from 'axios'
+import 'dotenv/config'
 
 export default class ApiLastFM {
   api: any
@@ -14,6 +15,8 @@ export default class ApiLastFM {
   }
 
   public async getTopTracks (userId) {
+    console.log(`getTopTracks: ${userId}`)
+
     return await this.api.get(`?method=user.gettoptracks&user=${userId}`)
   }
 }
